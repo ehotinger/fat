@@ -15,12 +15,13 @@ import (
 )
 
 func main() {
-	read := flag.Bool("read", false, "to enable read")
-	file := flag.String("file", "file.txt", "the file path")
+	log.Println("Hello world!")
+	log.Println("You can invoke this binary without any parameters to perform a 'slim' read, or pass in '--file /usr/bin/file.txt' to perform a 'fat' read")
+	file := flag.String("file", "", "the file path")
 	flag.Parse()
 
-	if *read {
-		log.Println("Big read incoming...")
+	if *file != "" {
+		log.Println("Reading the entire file...")
 		file, err := os.Open(*file)
 		if err != nil {
 			log.Fatal(err)
@@ -33,9 +34,9 @@ func main() {
 		if err := scanner.Err(); err != nil {
 			log.Fatal(err)
 		}
-		log.Println("Big read finished")
+		log.Println("Read through the entire file!")
 
 	} else {
-		log.Println("Slim")
+		log.Println("Skipped reading files")
 	}
 }
